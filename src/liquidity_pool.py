@@ -14,18 +14,19 @@ class LP:
         self.k = coin1_amt * coin2_amt
 
     def add_liquidity(self, amt_c1: float, amt_c2: float, adr: str):
-        try:
-            self.liquidity_providers[adr]["c1"] += amt_c1
-            self.liquidity_providers[adr]["c2"] += amt_c2
-        except:
-            self.liquidity_providers[adr]["c1"] = amt_c1
-            self.liquidity_providers[adr]["c2"] = amt_c2
+
         if self.c1_amt / self.c2_amt == amt_c1 / amt_c2:
             self.c1_amt += amt_c1
             self.c2_amt += amt_c2
             self.k = self.c1_amt * self.c2_amt
             self.c1_total += amt_c1
             self.c2_total += amt_c2
+            try:
+                self.liquidity_providers[adr]["c1"] += amt_c1
+                self.liquidity_providers[adr]["c2"] += amt_c2
+            except:
+                self.liquidity_providers[adr]["c1"] = amt_c1
+                self.liquidity_providers[adr]["c2"] = amt_c2
         else:
             raise Exception("not balanced ratio of amounts")
         return self.liquidity_providers[adr]
