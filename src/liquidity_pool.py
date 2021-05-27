@@ -43,6 +43,8 @@ class LP:
             return_amt = self.k / (self.c1_amt + amt) - self.c2_amt
             self.c1_amt += amt
             self.c2_amt -= return_amt
+            self.c1_total += amt
+            self.c2_total -= return_amt
             return return_amt
         else:
             for k, v in self.liquidity_providers.items():
@@ -50,4 +52,6 @@ class LP:
             return_amt = self.k / (self.c2_amt + amt) - self.c1_amt
             self.c2_amt += amt
             self.c1_amt -= return_amt
+            self.c2_total += amt
+            self.c1_total -= return_amt
             return return_amt
